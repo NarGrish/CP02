@@ -1,0 +1,34 @@
+---
+title: 'Übung 02: Verfahrens- und Maschinenfehler'
+author: "Tobias Blesgen und Leonardo Thome"
+date: "19.05.2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+header-includes: 
+ - \usepackage{amssymb}
+ - \usepackage{amsmath}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Stuff to do:
+- Einleitungstexte schreiben
+- 2-Punktformel, Variation von Schrittweite k -> Fehler aufzeichnen
+- 
+
+
+# Verfahrens- und Maschinenfehler
+
+## Maschinenfehler
+
+## Verfahrensfehler
+
+## Beispiel Anhand der Differentation
+
+Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = 2 sollen die Fehlertypen aufgezeigt werden.
+
+
