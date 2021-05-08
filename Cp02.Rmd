@@ -15,6 +15,18 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Im folgenden wollen wir die 2-Punktformel und 3-Punktformel auf ihre Verfahrensfehler untersuchen und durch Verwendung verschiedener Datentypen den Maschienfehler abschätzen.
+
+Die 2-Punktformel beschreibt die Ableitung einer Funktion $f(x)$ an der Stelle $x_i$ mit:
+  \begin{equation}
+    f'(x_i) = \frac{f(x_{i+1})-f(x_i)}{h} + O(h) 
+  \end{equation}
+  
+Die 3-Punktformel tut dies auch mit einem kleineren Verfahrensfehler der Ordnung $O(h^2)$
+  \begin{equation}
+    f'(x_i) = \frac{f(x_{i+1})-f(x_{i-1})}{2h} + O(h^2) 
+  \end{equation}
+
 Stuff to do:
 - Einleitungstexte schreiben
 - 2-Punktformel, Variation von Schrittweite k -> Fehler aufzeichnen
@@ -29,7 +41,7 @@ Stuff to do:
 
 ## Beispiel Anhand der Differentation
 
-Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = 2 sollen die Fehlertypen aufgezeigt werden.
+Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden.
 
 ```{Rcpp}
 #include <Rcpp.h>
