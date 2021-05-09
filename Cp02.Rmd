@@ -22,7 +22,7 @@ Die 2-Punktformel beschreibt die Ableitung einer Funktion $f(x)$ an der Stelle $
     f'(x_i) = \frac{f(x_{i+1})-f(x_i)}{h} + O(h) 
   \end{equation}
   
-Die 3-Punktformel tut dies auch mit einem kleineren Verfahrensfehler der Ordnung $O(h^2)$
+Die 3-Punktformel tut dies hingegen mit einem kleineren Verfahrensfehler der Ordnung $O(h^2)$
   \begin{equation}
     f'(x_i) = \frac{f(x_{i+1})-f(x_{i-1})}{2h} + O(h^2) 
   \end{equation}
@@ -85,6 +85,23 @@ Rcpp::List diff2PunktFloat(const float x, const int r){
 }
 ```
 
+
+```{r, echo=FALSE}
+x = -1
+r = 300
+double2a = diff2PunktDouble(x, r)
+float2a = diff2PunktFloat(x, r)
+```
+
+```{r, echo=FALSE}
+e1 = exp(-1)
+plot(double2a$x, double2a$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "dark blue")
+lines(float2a$x, float2a$y-e1, "l", col = "green")
+
+legend(0.0025,0.0006,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
+```
+
+
 ```{Rcpp}
 #include <Rcpp.h>
 #include <math.h>
@@ -127,27 +144,36 @@ Rcpp::List diff3PunktFloat(const float x, const int r){
 }
 ```
 
-
 ```{r, echo=FALSE}
 x = -1
 r = 200
-double2 = diff2PunktDouble(x, r)
-float2 = diff2PunktFloat(x, r)
-double3 = diff3PunktDouble(x, r)
-float3 = diff3PunktFloat(x, r)
+double3a = diff3PunktDouble(x, r)
+float3a = diff3PunktFloat(x, r)
+```
+
+```{r, echo=FALSE}
+e1 = exp(-1)
+plot(double3a$x, double3a$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "red")
+lines(float3a$x, float3a$y-e1, "l", col = "orange")
+
+legend(0.00335,0.0000015,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("red", "orange"), lty=1:1)
+```
+
+
+```{r, echo=FALSE}
+x = -1
+r = 1
+double2b = diff2PunktDouble(x, r)
+double3b = diff3PunktDouble(x, r)
 
 ```
 
 ```{r, echo=FALSE}
 e1 = exp(-1)
-plot(double2$x, double2$y-e1, "l", ylim=c(double3$y[99]-e1, float2$y[1]-e1), xlab = "h", log="xy", ylab = "Gesamtfehler", col = "dark blue")
-lines(double3$x, double3$y-e1, "l", col = "red")
-lines(float2$x, float2$y-e1, "l", col = "green")
-lines(float3$x, float3$y-e1, "l",  col = "orange")
-legend(0.01,0.038,legend=c("2 Punkt Double", "2 Punkt Float", "3 Punkt Double", "3 Punkt Float"), col = c("dark blue", "green", "red", "orange"), lty=1:1)
+plot(double2b$x, double2b$y-e1, "l", ylim=c(double3b$y[99]-e1, double2b$y[1]-e1), xlab = "h", log="xy", ylab = "Gesamtfehler", col = "dark blue")
+lines(double3b$x, double3b$y-e1, "l", col = "red")
 
-plot(double2$x, double2$y-e1, "l", xlab = "h", log="xy", ylab = "Gesamtfehler", col = "dark blue")
-lines(float2$x, float2$y-e1, "l", col = "green")
+legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark blue", "red"), lty=1:1)
 ```
 
 
