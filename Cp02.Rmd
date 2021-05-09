@@ -29,7 +29,7 @@ Stuff to do:
 
 ## Beispiel Anhand der Differentation
 
-Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = 2 sollen die Fehlertypen aufgezeigt werden.
+Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden.
 
 ```{Rcpp}
 #include <Rcpp.h>
@@ -118,22 +118,24 @@ Rcpp::List diff3PunktFloat(const float x, const int r){
 
 ```{r, echo=FALSE}
 x = -1
-r = 5
+r = 200
 double2 = diff2PunktDouble(x, r)
 float2 = diff2PunktFloat(x, r)
 double3 = diff3PunktDouble(x, r)
 float3 = diff3PunktFloat(x, r)
-double3$y[99]
-float2$y[1]
+
 ```
 
 ```{r, echo=FALSE}
 e1 = exp(-1)
-plot(double2$x, double2$y-e1, "l", ylim=c(double3$y[99]-e1, float2$y[1]-e1), xlab = "h", ylab = "Abweichung", col = "dark blue")
-lines(double3$x, double3$y-e1, "l", col = "blue")
-lines(float2$x, float2$y-e1, "l", col = "red")
+plot(double2$x, double2$y-e1, "l", ylim=c(double3$y[99]-e1, float2$y[1]-e1), xlab = "h", log="xy", ylab = "Gesamtfehler", col = "dark blue")
+lines(double3$x, double3$y-e1, "l", col = "red")
+lines(float2$x, float2$y-e1, "l", col = "green")
 lines(float3$x, float3$y-e1, "l",  col = "orange")
-legend(0.01,0.038,legend=c("2 Punkt Double", "2 Punkt Float", "3 Punkt Double", "3 Punkt Float"), col = c("dark blue", "red", "blue", "orange"), lty=1:1)
+legend(0.01,0.038,legend=c("2 Punkt Double", "2 Punkt Float", "3 Punkt Double", "3 Punkt Float"), col = c("dark blue", "green", "red", "orange"), lty=1:1)
+
+plot(double2$x, double2$y-e1, "l", xlab = "h", log="xy", ylab = "Gesamtfehler", col = "dark blue")
+lines(float2$x, float2$y-e1, "l", col = "green")
 ```
 
 
