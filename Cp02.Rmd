@@ -27,10 +27,6 @@ Die 3-Punktformel tut dies hingegen mit einem kleineren Verfahrensfehler der Ord
     f'(x_i) = \frac{f(x_{i+1})-f(x_{i-1})}{2h} + O(h^2) 
   \end{equation}
 
-Stuff to do:
-- Einleitungstexte schreiben
-- 2-Punktformel, Variation von Schrittweite k -> Fehler aufzeichnen
-- 
 
 
 # Verfahrens- und Maschinenfehler
@@ -41,7 +37,9 @@ Stuff to do:
 
 ## Beispiel Anhand der Differentation
 
-Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden.
+### Der 2-Punkt Ansatz
+
+Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden. Wir betrachten zuerst die 2-Punktformel und den Unterschied zwischen einem Ansatz, der ``Double`` und einem, der `Floats` verwendet. Da der Code bis auf den Typwechsel identisch ist, liegt hier nur der Double-Code vor: 
 
 ```{Rcpp}
 #include <Rcpp.h>
@@ -86,9 +84,10 @@ Rcpp::List diff2PunktFloat(const float x, const int r){
 ```
 
 
+
 ```{r, echo=FALSE}
 x = -1
-r = 300
+r = 450
 double2a = diff2PunktDouble(x, r)
 float2a = diff2PunktFloat(x, r)
 ```
