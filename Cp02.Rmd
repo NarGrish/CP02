@@ -33,6 +33,9 @@ Die 3-Punktformel tut dies hingegen mit einem kleineren Verfahrensfehler der Ord
 
 ## Maschinenfehler
 
+Da wir Zahlen am Computer nur endliche Stellen haben, geschiehen Rundungsfehler bei Berechnung von Zahlen die mehr Stellen besitzen als der benutzte Typ.
+Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$ und ist definiert über die gößte reelle Zahl $\delta_M$, so dass der Rechner noch $ 1+ \delta_M = 1$ berechnet (Seite 12 \cite{DeltaM}).
+
 ## Verfahrensfehler
 
 ## Beispiel Anhand der Differentation
@@ -196,7 +199,10 @@ lines(double3b$x, double3b$y-e1, "l", col = "red")
 legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark blue", "red"), lty=1:1)
 ```
 
+\begin{thebibliography}{99}
+\bibitem{DeltaM} 
+C. Urbach, \textit{Vorlesungsskript Computerphysiks},Seite 12,2021.
 
-
+\end{thebibliography}
 
 
