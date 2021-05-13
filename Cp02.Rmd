@@ -39,7 +39,7 @@ Die 3-Punktformel tut dies hingegen mit einem kleineren Verfahrensfehler der Ord
 
 ### Der 2-Punkt Ansatz
 
-Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden. Wir betrachten zuerst die 2-Punktformel und den Unterschied zwischen einem Ansatz, der ``Double`` und einem, der `Floats` verwendet. Da der Code bis auf den Typwechsel identisch ist, liegt hier nur der Double-Code vor: 
+Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden. Wir betrachten zuerst die 2-Punktformel und den Unterschied zwischen einem Ansatz, der ``Double`` und einem, der ``Floats`` verwendet. Da der Code bis auf den Typwechsel identisch ist, liegt hier nur der Double-Code vor: 
 
 ```{Rcpp}
 #include <Rcpp.h>
@@ -87,16 +87,23 @@ Rcpp::List diff2PunktFloat(const float x, const int r){
 
 ```{r, echo=FALSE}
 x = -1
-r = 450
-double2a = diff2PunktDouble(x, r)
-float2a = diff2PunktFloat(x, r)
+r1 = 1
+r2 = 450
+double2 = diff2PunktDouble(x, r1)
+float2 = diff2PunktFloat(x, r1)
+double2a = diff2PunktDouble(x, r2)
+float2a = diff2PunktFloat(x, r2)
 ```
 
 ```{r, echo=FALSE}
 e1 = exp(-1)
+
+plot(double2$x, double2$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "dark blue")
+lines(float2$x, float2$y-e1, "l", col = "green")
+legend(0.0025,0.0006,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
+
 plot(double2a$x, double2a$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "dark blue")
 lines(float2a$x, float2a$y-e1, "l", col = "green")
-
 legend(0.0025,0.0006,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
 ```
 
