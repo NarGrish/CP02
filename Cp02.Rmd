@@ -100,13 +100,18 @@ e1 = exp(-1)
 
 plot(double2$x, double2$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "dark blue")
 lines(float2$x, float2$y-e1, "l", col = "green")
-legend(0.0025,0.0006,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
+legend(0.01,0.2,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
 
 plot(double2a$x, double2a$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "dark blue")
 lines(float2a$x, float2a$y-e1, "l", col = "green")
-legend(0.0025,0.0006,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
+legend(0.00182,0.000405,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
 ```
 
+Während für h in der Größenortnung 1 bis 0,01 keine sichtbaren Differenzen zwischen den Gesammtfehlern hervorruft, kann in der nächst kleineren Größerenordnung eine Divergenz der beiden Fehlergrößen beobachtet werden.
+
+### Der 3-Punkt Ansatz
+
+Um das 2-Punktverfahren auch mit einem anderen Verfahren vergleichen zu können, verwenden wir das 3-Punktverfahren. Erneut implementieren wir es einmal mit ``Double`` und einmal mit ``Float``-Precision.
 
 ```{Rcpp}
 #include <Rcpp.h>
@@ -150,21 +155,30 @@ Rcpp::List diff3PunktFloat(const float x, const int r){
 }
 ```
 
+Trägt man nun die beiden Graphen grafisch auf so findet man für h's bei um die 0,005 die ersten Auffälligen Unterschiede:
+
 ```{r, echo=FALSE}
 x = -1
 r = 200
+r2 = 300
 double3a = diff3PunktDouble(x, r)
 float3a = diff3PunktFloat(x, r)
+
+double3b = diff3PunktDouble(x, r2)
+float3b = diff3PunktFloat(x, r2)
 ```
 
 ```{r, echo=FALSE}
 e1 = exp(-1)
 plot(double3a$x, double3a$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "red")
 lines(float3a$x, float3a$y-e1, "l", col = "orange")
-
 legend(0.00335,0.0000015,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("red", "orange"), lty=1:1)
-```
 
+plot(double3b$x, double3b$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "red")
+lines(float3b$x, float3b$y-e1, "l", col = "orange")
+legend(0.00182,3.0e-07,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("red", "orange"), lty=1:1)
+```
+Während der ``Double``-Graph eine glatte Gerade beschreibt, springt der ``Float``-Graph wahllos wirkend über und unter diese Gerade. Dieses Zittern wird mit sinkenden h immer extremer und verdeutlicht, dass die Unterschiede der Näherungswerte die Größenordnung des Maschinenfehlers erreichen. Um diese Zitterbewegung auch am ``Float``-Graphen zu entdecken, muss das h in der Größenordnung von $10^{-4}$ betrachtet werden.
 
 ```{r, echo=FALSE}
 x = -1
