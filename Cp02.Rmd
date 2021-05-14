@@ -19,24 +19,51 @@ Im folgenden wollen wir die 2-Punktformel und 3-Punktformel auf ihre Verfahrensf
 
 Die 2-Punktformel beschreibt die Ableitung einer Funktion $f(x)$ an der Stelle $x_i$ mit:
   \begin{equation}
-    f'(x_i) = \frac{f(x_{i+1})-f(x_i)}{h} + O(h) 
+    f'(x_i) = \frac{f(x_{i+1})-f(x_i)}{h} + \mathcal{O}(h) 
   \end{equation}
   
-Die 3-Punktformel tut dies hingegen mit einem kleineren Verfahrensfehler der Ordnung $O(h^2)$
+Die 3-Punktformel tut dies hingegen mit einem kleineren Verfahrensfehler der Ordnung $\mathcal{O}(h^2)$
   \begin{equation}
-    f'(x_i) = \frac{f(x_{i+1})-f(x_{i-1})}{2h} + O(h^2) 
+    f'(x_i) = \frac{f(x_{i+1})-f(x_{i-1})}{2h} + \mathcal{O}(h^2) 
   \end{equation}
 
-
-
 # Verfahrens- und Maschinenfehler
+
+## Verfahrensfehler
+
+### Verfahrensfehler der 2-Punktformel
+
+Nach der Taylor Entwicklung einer Funktion ergibt sich
+
+  \begin{equation}
+    f(x_{i+1}) = f(x_i) + hf'(x_i) + \frac{h^2}{2}f''(x_i) + \mathcal{O}(h^3).
+  \end{equation}
+Stellt man die Gleichung nach der Ableitung um, ergibt sich die gesuchte Form für die 2-Punktformel mit Fehlerordnungen:
+  \begin{equation}
+    f'(x_{i}) = \frac{f(x_{i+1})- f(x_i)}{h} - \frac{h}{2}f''(x_i) + \mathcal{O}(h^2)
+  \end{equation}
+Somit wird die höchste Fehlerordnung, und somit der Verfahrensfehler der 2-Punktformel durch $\frac{h}{2}f''(x_i)$ beschrieben.
+
+### Verfahrensfehler der 3-Punktformel
+
+Nach einem ähnlichen Ansatz wie zuvor betrachten wir in der 3-Punktformel die Taylorformel vor und nach $x_i$:
+  \begin{equation}
+    f(x_{i\pm 1}) = f(x_i) \pm hf'(x_i) + \frac{h^2}{2}f''(x_i) \pm \frac{h^3}{6}f'''(x_i) + \mathcal{O}(h^4).
+  \end{equation}
+Subtrahieren wir die positive und negative Gleichung ergibt sich
+  \begin{equation}
+    f'(x_{i}) = \frac{f(x_{i+1})- f(x_{i-1})}{2h} - \frac{h^2}{6}f'''(x_i) + \mathcal{O}(h^3)
+  \end{equation}
+
 
 ## Maschinenfehler
 
 Da wir Zahlen am Computer nur endliche Stellen haben, geschiehen Rundungsfehler bei Berechnung von Zahlen die mehr Stellen besitzen als der benutzte Typ.
 Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$ und ist definiert über die größte reelle Zahl $\delta_M$, so dass der Rechner noch $1 +  \delta_M = 1$ berechnet (Seite 12 /cite{DeltaM}).
 
-## Verfahrensfehler
+
+
+
 
 ## Beispiel Anhand der Differentation
 
