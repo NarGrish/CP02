@@ -9,6 +9,8 @@ output:
 header-includes: 
  - \usepackage{amssymb}
  - \usepackage{amsmath}
+ - \usepackage[ngerman]{babel}
+ - \bibliographystyle{unsrtnat}
 ---
 
 ```{r setup, include=FALSE}
@@ -66,19 +68,58 @@ Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$ und ist definiert ü
 
 ### Maschinenfehler der 2-Punktformel
 
+Mit
 \begin{align}
-  \Delta M (f(x+h)-f(x) &= \sqrt{f(x+h)^2\sigma^2+f(x)^2\delta_M^2}) \\
-  &= \sqrt{\sigma^2+\delta_M^2}|f(x)|\\ % Nicht ungefähr? ist ja nicht wirklich gleich...
-  &= \sqrt{\frac{1}{3}\delta_M^2+\delta_M^2}|f(x)| = \sqrt{\frac{4}{3}}\delta_M |f(x)|
+  \Delta M (f(x+h)-f(x)) &= \sqrt{f(x+h)^2\sigma^2+f(x)^2\sigma^2} \\
+  &\approx \sqrt{2\sigma^2}|f(x)|\\ 
+  &= \sqrt{2}\sigma |f(x)| = \sqrt{\frac{2}{3}}\delta_M |f(x)|
 \end{align}
+ergibt sich für den Maschienenfehler $F_M$ der 2-Punktformel:
+
+\begin{equation}
+  F_M = \sqrt{\frac{2}{3}}\frac{\delta_M}{h} |f(x)|
+\end{equation}
 
 ### Maschinenfehler der 3-Punktformel
 
-\begin{align}
-  \Delta M (f(x+h)-f(x-h) &= \sqrt{f(x+h)^2\sigma^2+f(x-h)^2\sigma^2}) \\
-  &= \sqrt{2\sigma^2f(x)^2}\\
-  &= \sqrt{2}\sigma f(x) = \sqrt{\frac{2}{3}}\delta_M |f(x)|
-\end{align}
+Analog zur 2-Punktformel ergibt sich mit,
+\begin{equation}
+  \Delta M (f(x+h)-f(x-h)) = \sqrt{\frac{2}{3}}\delta_M |f(x)|
+\end{equation}
+
+der Maschienenfehler $F_M$ durch:
+
+\begin{equation}
+  F_M = \sqrt{\frac{1}{6}}\frac{\delta_M}{h} |f(x)|
+\end{equation}
+
+
+## Verfahrensfehler
+Somit ergibt sich der Gesamtfehler der 2-Punktformel als:
+\begin{equation}
+  \delta_{Ges} = \sqrt{\frac{2}{3}}\frac{\delta_M}{h} |f(x)| + \frac{h}{2}f''(x_i)
+\end{equation}
+
+bzw. in unserem Fall:
+
+\begin{equation}
+  \delta_{Ges} = (\sqrt{\frac{1}{6}}\frac{\delta_M}{h}+ \frac{h}{2}) e^x
+\end{equation}
+
+Ähnilch ergibt sich für den Gesamtfehler der 3-Punktformel:
+
+\begin{equation}
+  \delta_{Ges} = \sqrt{\frac{1}{6}}\frac{\delta_M}{h} |f(x)| + \frac{h^2}{6}f'''(x_i)
+\end{equation}
+
+bzw. in unserem Fall:
+
+\begin{equation}
+  \delta_{Ges} = (\sqrt{\frac{1}{6}}\frac{\delta_M}{h}+ \frac{h^2}{6}) e^x
+\end{equation}
+
+Um dieses Verhalten zu bestätigen werden die Gesamtfehler im späteren Verflauf an die aufgetragenen Fehlerverläufe gefittet.
+Dabei wird für float (single precision) eine Maschienengenauigkeit von $\delta_{Mf} \approx 6*10^{-8}$ und für double (double precision) eine von $\delta_{Md} \approx 1,1*10^{-16}$ angenommen \cite{Genau}.
 
 ## Beispiel Anhand der Differentation
 
@@ -245,6 +286,9 @@ legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark bl
 \begin{thebibliography}{99}
 \bibitem{DeltaM} 
 C. Urbach, \textit{Vorlesungsskript Computerphysiks},Seite 12,2021.
+
+\bibitem{Genau} 
+Wikipedia, Artikel: \url{https://de.wikipedia.org/wiki/Maschinengenauigkeit}, 15.05.2021.
 
 \end{thebibliography}
 
