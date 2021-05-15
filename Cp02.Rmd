@@ -64,7 +64,7 @@ Der Verfahrensfehler liegt also bei $\frac{h^2}{6}f'''(x_i)$.
 ## Maschinenfehler
 
 Da wir Zahlen am Computer nur endliche Stellen haben, geschiehen Rundungsfehler bei Berechnung von Zahlen die mehr Stellen besitzen als der benutzte Typ.
-Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$ und ist definiert über die größte reelle Zahl $\delta_M$, so dass der Rechner noch $1 +  \delta_M = 1$ berechnet (Seite 12 /cite{DeltaM}).
+Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$ und ist definiert über die größte reelle Zahl $\delta_M$, so dass der Rechner noch $1 +  \delta_M = 1$ berechnet (Seite 12 \cite{DeltaM}).
 
 ### Maschinenfehler der 2-Punktformel
 
