@@ -94,7 +94,7 @@ der Maschienenfehler $F_M$ durch:
 \end{equation}
 
 
-## Verfahrensfehler
+## Gesammtfehler
 Somit ergibt sich der Gesamtfehler der 2-Punktformel als:
 \begin{equation}
   \delta_{Ges} = \sqrt{\frac{2}{3}}\frac{\delta_M}{h} |f(x)| + \frac{h}{2}f''(x_i)
@@ -285,7 +285,7 @@ legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark bl
 
 \begin{thebibliography}{99}
 \bibitem{DeltaM} 
-C. Urbach, \textit{Vorlesungsskript Computerphysiks},Seite 12,2021.
+C. Urbach, \textit{Vorlesungsskript Computerphysik},Seite 12,2021.
 
 \bibitem{Genau} 
 Wikipedia, Artikel: \url{https://de.wikipedia.org/wiki/Maschinengenauigkeit}, 15.05.2021.
