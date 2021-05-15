@@ -281,7 +281,20 @@ lines(double3b$x, double3b$y-e1, "l", col = "red")
 
 legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark blue", "red"), lty=1:1)
 ```
+```{r, echo=FALSE}
+#simulate some data
+set.seed(20160227)
+x<-double2b$x-e1
+y<-double2b$y-e1
+#for simple models nls find good starting values for the parameters even if it throw a warning
+m<-nls(y~a*x+b/(1.05+x))
+#get some estimation of goodness of fit
+cor(y,predict(m))
 
+#plot
+plot(x,y,log="xy",)
+lines(x,predict(m),lty=2,col="red",lwd=3)
+```
 
 \begin{thebibliography}{99}
 \bibitem{DeltaM} 
