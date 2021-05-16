@@ -289,23 +289,26 @@ y<-double2b$y-e1
 
 x2<-double3b$x
 y2<-double3b$y-e1
-#for simple models nls find good starting values for the parameters even if it throw a warning
-nls <- (y~a*x^2+b/(1.05+x))
-#get some estimation of goodness of fit
-cor(y,predict(m))
 
+delta_2Punkt = sqrt(2/3) *1.1*10^(-16)/x + x/(2*(2+2/3))
+#Qaudratuischer Fehlerteil zieht die wert im oberen weg.
 
-delta_2Punkt = sqrt(2/3) *1.1*10^(-16)/x + x/5
-
-delta_3Punkt = sqrt(1/6) *1.1*10^(-16)/x + x^2/16
+delta_3Punkt = sqrt(1/6) *1.1*10^(-16)/x + x^2/(6*(2+2/3))
 
 #plot
-plot(x,y,log="xy",)
-lines(x2,y2,col="red")
+plot(x,y, "p", ylim=c(double3b$y[99]-e1, double2b$y[1]-e1), xlab = "h", log="xy", ylab = "Gesamtfehler", col = "dark blue")
+lines(x2,y2,"p",col="red")
 lines(x,delta_2Punkt, col="green")
 lines(x2,delta_3Punkt, col="orange")
 
+legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double","2 Punkt Fehler","3 Punkt Fehler"), col = c("dark blue", "red","green","orange"), lty=1:1)
+
 ```
+Wie wir sehen passen die zuvor bestimmten Fehlerfunktionen mit den angepassten Parameter mit den Fehlerkurven der Berechung für 2-Punkt und 3-Punktformel in näherung überein.
+Wir bemerken aber auch das bei der 2_Punktformel bei größem h der Fehler der Berechnung nach obenhin abweicht. Dies liegt an dem Verfahrensfehler durch die Taylerentwicklung, wo der nächste Fehlerterm der Ordnung $\mathrm{h^2}$ wäre, was für klein h irrelevant ist aber jedoch nicht für zB. h = 1.
+Ebenso fällt bei Betrachtung der Verfahrensfehlers auf, das der Verfahrensfehler jeweils nicht wie erwartet mit $\frac{\mathrm{h}}{2}$ für die 2-Punkt und $\frac{\mathrm{h^2}}{6}$ für die 3-Punktformel ins Gewicht fällt. Sondern mit $\frac{\mathrm{h}}{2*2,667}$ für die 2-Punkt und $\frac{\mathrm{h^2}}{6*2,667}$ für die 3-Punktformel. Woduch unsere Berechnung unerwarteterweise um etwa einen Faktor 2,667 besser ist als erwartet.
+Für diese Verkleinerung des Fehlers können wir keine Erklärung finden. 
+
 
 \begin{thebibliography}{99}
 \bibitem{DeltaM} 
