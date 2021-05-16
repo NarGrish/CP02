@@ -17,14 +17,14 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Im folgenden wollen wir die 2-Punktformel und 3-Punktformel auf ihre Verfahrensfehler untersuchen und durch Verwendung verschiedener Datentypen den Maschienfehler abschätzen.
+Im Folgenden wollen wir die 2-Punktformel und 3-Punktformel auf ihre Verfahrensfehler untersuchen und durch Verwendung verschiedener Datentypen den Maschinenfehler abschätzen.
 
-Die 2-Punktformel beschreibt die Ableitung einer Funktion $f(x)$ an der Stelle $x_i$ mit:
+Die 2-Punktformel beschreibt die Ableitung einer Funktion $f(x)$ an der Stelle $x_i$ mit
   \begin{equation}
-    f'(x_i) = \frac{f(x_{i+1})-f(x_i)}{h} + \mathcal{O}(h) 
+    f'(x_i) = \frac{f(x_{i+1})-f(x_i)}{h} + \mathcal{O}(h) .
   \end{equation}
   
-Die 3-Punktformel leistet die Berechnung hingegen mit einem kleineren Verfahrensfehler der Ordnung $\mathcal{O}(h^2)$
+Die 3-Punktformel leistet die Berechnung hingegen mit einem kleineren Verfahrensfehler der Ordnung $\mathcal{O}(h^2)$.
   \begin{equation}
     f'(x_i) = \frac{f(x_{i+1})-f(x_{i-1})}{2h} + \mathcal{O}(h^2) 
   \end{equation}
@@ -36,16 +36,16 @@ Die 3-Punktformel leistet die Berechnung hingegen mit einem kleineren Verfahrens
 
 ### Verfahrensfehler der 2-Punktformel
 
-Nach der Taylor Entwicklung einer Funktion ergibt sich
+Nach der Taylorentwicklung einer Funktion ergibt sich
 
   \begin{equation}
     f(x_{i+1}) = f(x_i) + hf'(x_i) + \frac{h^2}{2}f''(x_i) + \mathcal{O}(h^3).
   \end{equation}
-Stellt man die Gleichung nach der Ableitung um, ergibt sich die gesuchte Form für die 2-Punktformel mit Fehlerordnungen:
+Stellt man die Gleichung nach der Ableitung um, ergibt sich die gesuchte Form für die 2-Punktformel mit Fehlerordnungen als
   \begin{equation}
-    f'(x_{i}) = \frac{f(x_{i+1})- f(x_i)}{h} - \frac{h}{2}f''(x_i) + \mathcal{O}(h^2)
+    f'(x_{i}) = \frac{f(x_{i+1})- f(x_i)}{h} - \frac{h}{2}f''(x_i) + \mathcal{O}(h^2).
   \end{equation}
-Somit wird die höchste Fehlerordnung, und somit der Verfahrensfehler der 2-Punktformel durch $\frac{h}{2}f''(x_i)$ beschrieben.
+Somit wird die höchste Fehlerordnung und damit der Verfahrensfehler der 2-Punktformel durch $\frac{h}{2}f''(x_i)$ beschrieben.
 
 ### Verfahrensfehler der 3-Punktformel
 
@@ -55,7 +55,7 @@ Nach einem ähnlichen Ansatz wie zuvor betrachten wir in der 3-Punktformel die T
   \end{equation}
 Subtrahieren wir die positive und negative Gleichung ergibt sich
   \begin{equation}
-    f'(x_{i}) = \frac{f(x_{i+1})- f(x_{i-1})}{2h} - \frac{h^2}{6}f'''(x_i) + \mathcal{O}(h^3)
+    f'(x_{i}) = \frac{f(x_{i+1})- f(x_{i-1})}{2h} - \frac{h^2}{6}f'''(x_i) + \mathcal{O}(h^3).
   \end{equation}
 Der Verfahrensfehler liegt also bei $\frac{h^2}{6}f'''(x_i)$.
 
@@ -63,8 +63,8 @@ Der Verfahrensfehler liegt also bei $\frac{h^2}{6}f'''(x_i)$.
 
 ## Maschinenfehler
 
-Da wir Zahlen am Computer nur endliche Stellen haben, geschiehen Rundungsfehler bei Berechnung von Zahlen die mehr Stellen besitzen als der benutzte Typ.
-Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$ und ist definiert über die größte reelle Zahl $\delta_M$, so dass der Rechner noch $1 +  \delta_M = 1$ berechnet (Seite 12 \cite{DeltaM}).
+Da die darstellbaren Zahlen im Computer nur endlich viele Stellen haben, geschehen Rundungsfehler bei Berechnung von Zahlen, die mehr Stellen verwenden als der benutzte Zahlentyp.
+Diese Genauigkeit nennen wir Maschiengenauigkeit $\delta_M$. Sie ist definiert über die größte reelle Zahl $\delta_M$, für die der Rechner noch $1 +  \delta_M = 1$ berechnet (Seite 12 \cite{DeltaM}).
 
 ### Maschinenfehler der 2-Punktformel
 
@@ -74,7 +74,7 @@ Mit
   &\approx \sqrt{2\sigma^2}|f(x)|\\ 
   &= \sqrt{2}\sigma |f(x)| = \sqrt{\frac{2}{3}}\delta_M |f(x)|
 \end{align}
-ergibt sich für den Maschienenfehler $F_M$ der 2-Punktformel:
+ergibt sich für den Maschinenfehler $F_M$ der 2-Punktformel:
 
 \begin{equation}
   F_M = \sqrt{\frac{2}{3}}\frac{\delta_M}{h} |f(x)|
@@ -82,19 +82,19 @@ ergibt sich für den Maschienenfehler $F_M$ der 2-Punktformel:
 
 ### Maschinenfehler der 3-Punktformel
 
-Analog zur 2-Punktformel ergibt sich mit,
+Analog zur 2-Punktformel ergibt sich mit
 \begin{equation}
   \Delta M (f(x+h)-f(x-h)) = \sqrt{\frac{2}{3}}\delta_M |f(x)|
 \end{equation}
 
-der Maschienenfehler $F_M$ durch:
+der Maschinenfehler $F_M$ durch:
 
 \begin{equation}
   F_M = \sqrt{\frac{1}{6}}\frac{\delta_M}{h} |f(x)|
 \end{equation}
 
 
-## Gesammtfehler
+## Gesamtfehler
 Somit ergibt sich der Gesamtfehler der 2-Punktformel als:
 \begin{equation}
   \delta_{Ges} = \sqrt{\frac{2}{3}}\frac{\delta_M}{h} |f(x)| + \frac{h}{2}f''(x_i)
@@ -106,7 +106,7 @@ bzw. in unserem Fall:
   \delta_{Ges} = (\sqrt{\frac{2}{3}}\frac{\delta_M}{h}+ \frac{h}{2}) e^x
 \end{equation}
 
-Ähnilch ergibt sich für den Gesamtfehler der 3-Punktformel:
+Ähnlich ergibt sich für den Gesamtfehler der 3-Punktformel:
 
 \begin{equation}
   \delta_{Ges} = \sqrt{\frac{1}{6}}\frac{\delta_M}{h} |f(x)| + \frac{h^2}{6}f'''(x_i)
@@ -118,14 +118,14 @@ bzw. in unserem Fall:
   \delta_{Ges} = (\sqrt{\frac{1}{6}}\frac{\delta_M}{h}+ \frac{h^2}{6}) e^x
 \end{equation}
 
-Um dieses Verhalten zu bestätigen werden die Gesamtfehler im späteren Verflauf an die aufgetragenen Fehlerverläufe gefittet.
-Dabei wird für ``Floats`` (single precision) eine Maschienengenauigkeit von $\delta_{Mf} \approx 6*10^{-8}$ und für ``Double`` (double precision) eine von $\delta_{Md} \approx 1,1*10^{-16}$ angenommen \cite{Genau}.
+Um dieses Verhalten zu bestätigen, werden die Gesamtfehler im späteren Verlauf an die aufgetragenen Fehlerverläufe gefittet.
+Dabei wird für ``Float`` (single precision) eine Maschinengenauigkeit von $\delta_{Mf} \approx 6*10^{-8}$ und für ``Double`` (double precision) eine von $\delta_{Md} \approx 1,1*10^{-16}$ angenommen \cite{Genau}.
 
-## Beispiel Anhand der Differentation
+## Beispiel anhand der Differentation
 
-### Der 2-Punkt Ansatz
+### Der 2-Punkt-Ansatz
 
-Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden. Wir betrachten zuerst die 2-Punktformel und den Unterschied zwischen einem Ansatz, der ``Double`` und einem, der ``Floats`` verwendet. Da der Code bis auf den Typwechsel identisch ist, liegt hier nur der Double-Code vor: 
+Am Beispiel der Differentation der Funktion $f(x) = e^x$ an der Stelle x = -1 sollen die Fehlertypen aufgezeigt werden. Wir betrachten zuerst die 2-Punktformel und den Unterschied zwischen einem Ansatz der ``Double`` und einem der ``Floats`` verwendet. Da der Code bis auf den Typwechsel identisch ist, liegt hier nur der ``Double``-Code vor: 
 
 ```{Rcpp}
 #include <Rcpp.h>
@@ -193,9 +193,9 @@ lines(float2a$x, float2a$y-e1, "l", col = "green")
 legend(0.00182,0.000405,legend=c("2 Punkt Double", "2 Punkt Float"), col = c("dark blue", "green"), lty=1:1)
 ```
 
-Während für h in der Größenortnung 1 bis 0,01 keine sichtbaren Differenzen zwischen den Gesammtfehlern hervorruft, kann in der nächst kleineren Größerenordnung eine Divergenz der beiden Fehlergrößen beobachtet werden.
+Während für h in der Größenordnung 1 bis 0,01 keine sichtbare Differenz zwischen den Gesamtfehlern auftritt, kann in der nächst kleineren Größenordnung eine Divergenz der beiden Fehlergrößen beobachtet werden.
 
-### Der 3-Punkt Ansatz
+### Der 3-Punkt-Ansatz
 
 Um das 2-Punktverfahren auch mit einem anderen Verfahren vergleichen zu können, verwenden wir das 3-Punktverfahren. Erneut implementieren wir es einmal mit ``Double`` und einmal mit ``Float``-Precision.
 
@@ -241,21 +241,17 @@ Rcpp::List diff3PunktFloat(const float x, const int r){
 }
 ```
 
-Trägt man nun die beiden Graphen grafisch auf so findet man für h's bei um die 0,005 die ersten Auffälligen Unterschiede:
+Trägt man nun die beiden Graphen grafisch auf, so findet man für h bei ungefähr 0,005 die ersten auffälligen Unterschiede:
 
 ```{r, echo=FALSE}
 x = -1
 r = 200
 r2 = 300
-r3 = 30000
 double3a = diff3PunktDouble(x, r)
 float3a = diff3PunktFloat(x, r)
 
 double3b = diff3PunktDouble(x, r2)
 float3b = diff3PunktFloat(x, r2)
-
-double3c = diff3PunktDouble(x, r3)
-float3c = diff3PunktFloat(x, r3)
 ```
 
 ```{r, echo=FALSE}
@@ -267,27 +263,9 @@ legend(0.00335,0.0000015,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("r
 plot(double3b$x, double3b$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "red")
 lines(float3b$x, float3b$y-e1, "l", col = "orange")
 legend(0.00182,3.0e-07,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("red", "orange"), lty=1:1)
-
-plot(double3c$x, double3c$y-e1, "l", log="xy", xlab = "h", ylab = "Gesamtfehler", col = "red")
-lines(float3c$x, float3c$y-e1, "l", col = "orange")
-legend(0.00182,3.0e-07,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("red", "orange"), lty=1:1)
 ```
-Während der ``Double``-Graph eine glatte Gerade beschreibt, springt der ``Float``-Graph wahllos wirkend über und unter diese Gerade. Dieses Zittern wird mit sinkenden h immer extremer und verdeutlicht, dass die Unterschiede der Näherungswerte die Größenordnung des Maschinenfehlers erreichen. Um diese Zitterbewegung auch am ``Double``-Graphen zu entdecken, muss das h in der Größenordnung von $10^{-5}$ betrachtet werden.
-Da das Zittern ein resultat des Maschienefehlers ist können wir über die Stärke des Zitterns die Maschienengenauigkeit von ``Float`` und ``Double`` abschätzen.
-Für ``Float`` gilt mit dem Werten $F_M = 0.2* 10^{-7}$ bei h $= 0.003$ (aus dem Graphen):
-\begin{equation}
-  \delta_M = \sqrt{\frac{3}{2}}\frac{h* F_M}{|f(-1)|} = \sqrt{\frac{3}{2}}\frac{0.003* 0.2* 10^{-7}}{e^{-1}} \approx 2*10^{-10}
-\end{equation}
-Und für ``Double`` mit den Werten $F_M = 0.2* 10^{-11}$ bei h $= 3.332*10^{-5}$ (aus dem Graphen):
-\begin{equation}
-  \delta_M = \sqrt{6}\frac{h* F_M}{|f(-1)|} = \sqrt{6}\frac{3.332* 10^{-5} * 0.2* 10^{-11}}{e^{-1}} \approx 4.4*10^{-16}
-\end{equation}
-Vergleicht man diese Werte mit den erwarteten Genauigkeiten von $\delta_{Mf} \approx 6*10^{-8}$ für ``Floats`` und $\delta_{Md} \approx 1,1*10^{-16}$ für ``Double`` sieht man das die Genauigkeit des ``Doubles`` mit $\delta_{M} \approx 4.4*10^{-16}$ zwar bei uns etwas kleiner ist, jedoch in Näherung gut zum Literaturwert passt.
-Beim ``Float`` sieht es jedoch anders aus. Wir erhalten mit $\delta_{M} \approx 2*10^{-10}$ eine Genauigkeit die etwa 2 Zehnerpotenzen zu genau ist. Dies kann an einem Rechenfehler liegen, den wir getätigt aber nicht gefunden haben. Eine weitere Möglichkeit könnte sein, dass der Rechner in teilen der Rechnungen einen Typcast vom ``Floats``zu ``Double`` macht und wieder zurück, wodurch unsere Genauigkeit verbessert wird.
+Während der ``Double``-Graph eine glatte Gerade beschreibt, springt der ``Float``-Graph unvorhersehbar um diese Gerade. Dieses Zittern wird mit sinkendem h immer extremer und verdeutlicht, dass die Unterschiede der Näherungswerte die Größenordnung des Maschinenfehlers erreichen. Um diese Zitterbewegung auch am ``Float``-Graphen zu entdecken, muss das h in der Größenordnung von $10^{-4}$ betrachtet werden.
 
-
-Um dieses Verhalten zu bestätigen werden die Gesamtfehler im späteren Verflauf an die aufgetragenen Fehlerverläufe gefittet.
-Dabei wird für  (single precision) eine Maschienengenauigkeit  und für  (double precision) eine von  angenommen \cite{Genau}.
 ```{r, echo=FALSE}
 x = -1
 r = 1
@@ -328,9 +306,9 @@ legend(0.01,0.198,legend=c("2 Punkt Werte", "3 Punkt Werte","2 Punkt Fit","3 Pun
 
 ```
 
-Wie wir sehen passen die zuvor bestimmten Fehlerfunktionen mit den angepassten Parameter mit den Fehlerkurven der Berechung für 2-Punkt und 3-Punktformel in näherung überein.
-Wir bemerken aber auch das bei der 2_Punktformel bei größem h der Fehler der Berechnung nach obenhin abweicht. Dies liegt an dem Verfahrensfehler durch die Taylerentwicklung, wo der nächste Fehlerterm der Ordnung $\mathrm{h^2}$ wäre, was für klein h irrelevant ist aber jedoch nicht für zB. h = 1.
-Ebenso fällt bei Betrachtung der Verfahrensfehlers auf, das der Verfahrensfehler jeweils nicht wie erwartet mit $\frac{\mathrm{h}}{2}$ für die 2-Punkt und $\frac{\mathrm{h^2}}{6}$ für die 3-Punktformel ins Gewicht fällt. Sondern mit $\frac{\mathrm{h}}{2*2,667}$ für die 2-Punkt und $\frac{\mathrm{h^2}}{6*2,667}$ für die 3-Punktformel. Woduch unsere Berechnung unerwarteterweise um etwa einen Faktor 2,667 besser ist als erwartet.
+Wie wir sehen, passen die zuvor bestimmten Fehlerfunktionen mit den angepassten Parametern mit den Fehlerkurven der Berechung für 2-Punkt- und 3-Punktformel in Näherung überein.
+Wir bemerken aber auch, dass bei der 2-Punktformel bei größerem h der Fehler der Berechnung nach oben abweicht. Dies liegt an dem Verfahrensfehler durch die Taylerentwicklung, wo der nächste Fehlerterm der Ordnung $\mathrm{h^2}$ wäre, was für kleine h irrelevant ist, jedoch nicht für z.B. h = 1.
+Ebenso fällt bei Betrachtung der Verfahrensfehler auf, dass der Verfahrensfehler jeweils nicht wie erwartet mit $\frac{\mathrm{h}}{2}$ für die 2-Punkt- und $\frac{\mathrm{h^2}}{6}$ für die 3-Punktformel ins Gewicht fällt. Sondern mit $\frac{\mathrm{h}}{2*2,667}$ für die 2-Punkt- und $\frac{\mathrm{h^2}}{6*2,667}$ für die 3-Punktformel. Wodurch unsere Berechnung unerwarteterweise um etwa einen Faktor 2,667 besser ist als erwartet.
 Für diese Verkleinerung des Fehlers können wir keine Erklärung finden. 
 
 
