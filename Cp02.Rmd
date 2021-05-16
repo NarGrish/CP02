@@ -281,6 +281,7 @@ lines(double3b$x, double3b$y-e1, "l", col = "red")
 
 legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark blue", "red"), lty=1:1)
 ```
+
 ```{r, echo=FALSE}
 #simulate some data
 set.seed(20160227)
@@ -301,9 +302,10 @@ lines(x2,y2,"p",col="red")
 lines(x,delta_2Punkt, col="green")
 lines(x2,delta_3Punkt, col="orange")
 
-legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double","2 Punkt Fehler","3 Punkt Fehler"), col = c("dark blue", "red","green","orange"), lty=1:1)
+legend(0.01,0.198,legend=c("2 Punkt Werte", "3 Punkt Werte","2 Punkt Fit","3 Punkt Fit"), col = c("dark blue", "red","green","orange"),cex = 0.75, lty=1:1)
 
 ```
+
 Wie wir sehen passen die zuvor bestimmten Fehlerfunktionen mit den angepassten Parameter mit den Fehlerkurven der Berechung für 2-Punkt und 3-Punktformel in näherung überein.
 Wir bemerken aber auch das bei der 2_Punktformel bei größem h der Fehler der Berechnung nach obenhin abweicht. Dies liegt an dem Verfahrensfehler durch die Taylerentwicklung, wo der nächste Fehlerterm der Ordnung $\mathrm{h^2}$ wäre, was für klein h irrelevant ist aber jedoch nicht für zB. h = 1.
 Ebenso fällt bei Betrachtung der Verfahrensfehlers auf, das der Verfahrensfehler jeweils nicht wie erwartet mit $\frac{\mathrm{h}}{2}$ für die 2-Punkt und $\frac{\mathrm{h^2}}{6}$ für die 3-Punktformel ins Gewicht fällt. Sondern mit $\frac{\mathrm{h}}{2*2,667}$ für die 2-Punkt und $\frac{\mathrm{h^2}}{6*2,667}$ für die 3-Punktformel. Woduch unsere Berechnung unerwarteterweise um etwa einen Faktor 2,667 besser ist als erwartet.
