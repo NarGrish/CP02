@@ -284,21 +284,27 @@ legend(0.01,0.198,legend=c("2 Punkt Double", "3 Punkt Double"), col = c("dark bl
 ```{r, echo=FALSE}
 #simulate some data
 set.seed(20160227)
-x<-double3b$x
-y<-double3b$y-e1
+x<-double2b$x
+y<-double2b$y-e1
+
+x2<-double3b$x
+y2<-double3b$y-e1
 #for simple models nls find good starting values for the parameters even if it throw a warning
 nls <- (y~a*x^2+b/(1.05+x))
 #get some estimation of goodness of fit
 cor(y,predict(m))
 
 
-delta_2Punkt = sqrt(2/3) *1.1*10^(-16)/x + x/2
+delta_2Punkt = sqrt(2/3) *1.1*10^(-16)/x + x/5
 
-delta_3Punkt = sqrt(1/6) *1.1*10^(-16)/x + x^2/6
+delta_3Punkt = sqrt(1/6) *1.1*10^(-16)/x + x^2/16
+
 #plot
 plot(x,y,log="xy",)
-lines(x,predict(m),lty=2,col="red",lwd=3)
-lines(x,delta_3Punkt, col="green")
+lines(x2,y2,col="red")
+lines(x,delta_2Punkt, col="green")
+lines(x2,delta_3Punkt, col="orange")
+
 ```
 
 \begin{thebibliography}{99}
