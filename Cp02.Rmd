@@ -247,11 +247,15 @@ Trägt man nun die beiden Graphen grafisch auf, so findet man für h bei ungefä
 x = -1
 r = 200
 r2 = 300
+r3 = 30000
 double3a = diff3PunktDouble(x, r)
 float3a = diff3PunktFloat(x, r)
 
 double3b = diff3PunktDouble(x, r2)
 float3b = diff3PunktFloat(x, r2)
+
+double3c = diff3PunktDouble(x, r3)
+float3c = diff3PunktFloat(x, r3)
 ```
 
 ```{r, echo=FALSE}
@@ -269,7 +273,7 @@ lines(float3c$x, float3c$y-e1, "l", col = "orange")
 legend(0.00182,3.0e-07,legend=c("3 Punkt Double", "3 Punkt Float"), col = c("red", "orange"), lty=1:1)
 ```
 Während der ``Double``-Graph eine glatte Gerade beschreibt, springt der ``Float``-Graph wahllos wirkend über und unter diese Gerade. Dieses Zittern wird mit sinkenden h immer extremer und verdeutlicht, dass die Unterschiede der Näherungswerte die Größenordnung des Maschinenfehlers erreichen. Um diese Zitterbewegung auch am ``Double``-Graphen zu entdecken, muss das h in der Größenordnung von $10^{-5}$ betrachtet werden.
-Da das Zittern ein resultat des Maschienefehlers ist können wir über die Stärke des Zitterns die Maschienengenauigkeit von ``Float`` und ``Double`` abschätzen.
+Da das Zittern ein Resultat des Maschienefehlers ist können wir über die Stärke des Zitterns die Maschienengenauigkeit von ``Float`` und ``Double`` abschätzen.
 Für ``Float`` gilt mit dem Werten $F_M = 0.2* 10^{-7}$ bei h $= 0.003$ (aus dem Graphen):
 \begin{equation}
   \delta_M = \sqrt{\frac{3}{2}}\frac{h* F_M}{|f(-1)|} = \sqrt{\frac{3}{2}}\frac{0.003* 0.2* 10^{-7}}{e^{-1}} \approx 2*10^{-10}
@@ -278,8 +282,8 @@ Und für ``Double`` mit den Werten $F_M = 0.2* 10^{-11}$ bei h $= 3.332*10^{-5}$
 \begin{equation}
   \delta_M = \sqrt{6}\frac{h* F_M}{|f(-1)|} = \sqrt{6}\frac{3.332* 10^{-5} * 0.2* 10^{-11}}{e^{-1}} \approx 4.4*10^{-16}
 \end{equation}
-Vergleicht man diese Werte mit den erwarteten Genauigkeiten von $\delta_{Mf} \approx 6*10^{-8}$ für ``Floats`` und $\delta_{Md} \approx 1,1*10^{-16}$ für ``Double`` sieht man das die Genauigkeit des ``Doubles`` mit $\delta_{M} \approx 4.4*10^{-16}$ zwar bei uns etwas kleiner ist, jedoch in Näherung gut zum Literaturwert passt.
-Beim ``Float`` sieht es jedoch anders aus. Wir erhalten mit $\delta_{M} \approx 2*10^{-10}$ eine Genauigkeit die etwa 2 Zehnerpotenzen zu genau ist. Dies kann an einem Rechenfehler liegen, den wir getätigt aber nicht gefunden haben. Eine weitere Möglichkeit könnte sein, dass der Rechner in teilen der Rechnungen einen Typcast vom ``Floats``zu ``Double`` macht und wieder zurück, wodurch unsere Genauigkeit verbessert wird.
+Vergleicht man diese Werte mit den erwarteten Genauigkeiten von $\delta_{Mf} \approx 6*10^{-8}$ für ``Floats`` und $\delta_{Md} \approx 1,1*10^{-16}$ für ``Double``, sieht man, dass die Genauigkeit des ``Doubles`` mit $\delta_{M} \approx 4.4*10^{-16}$ zwar bei uns etwas kleiner ist, jedoch in Näherung gut zum Literaturwert passt.
+Beim ``Float`` sieht es jedoch anders aus. Wir erhalten mit $\delta_{M} \approx 2*10^{-10}$ eine Genauigkeit die etwa 2 Zehnerpotenzen zu genau ist. Dies kann an einem Rechenfehler liegen, den wir jedoch nicht gefunden haben. Eine weitere Möglichkeit könnte sein, dass der Rechner in Teilen der Rechnungen einen Typcast vom ``Floats``zu ``Double`` macht und wieder zurück, wodurch unsere Genauigkeit verbessert wird.
 
 
 Um dieses Verhalten zu bestätigen werden die Gesamtfehler im späteren Verflauf an die aufgetragenen Fehlerverläufe gefittet.
